@@ -105,8 +105,9 @@ body.lock-gallery {
 }
 
 input.error {
-  -webkit-box-shadow: inset 0px 0px 6px #ff0000;
-          box-shadow: inset 0px 0px 6px #ff0000;
+  border: 2px solid red;
+  -webkit-box-shadow: inset 0px 0px 10px #a20000;
+          box-shadow: inset 0px 0px 10px #a20000;
   -webkit-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
 }
