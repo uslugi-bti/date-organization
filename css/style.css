@@ -1126,6 +1126,7 @@ body.lock-gallery {
   height: 70px;
   bottom: 20px;
   right: 20px;
+  z-index: 30;
   background: url("../img/anchor/01.png") center/contain no-repeat;
   visibility: hidden;
   opacity: 0;
