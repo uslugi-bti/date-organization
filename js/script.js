@@ -35,9 +35,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const formOpen = document.querySelector(".fullscreen__link>a");
+    const callbackButton = document.querySelector(".callback");
     const formBody = document.querySelector(".popup-form");
     const formClose = document.querySelector(".popup-form__close");
 
+    callbackButton.addEventListener("click", function (event) {
+        body.classList.add("lock-form");
+        formBody.classList.add("active");
+        event.preventDefault();
+    });
     formOpen.addEventListener("click", function (event) {
         body.classList.add("lock-form");
         formBody.classList.add("active");
@@ -147,54 +153,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    const blockTitles = document.querySelectorAll(".about-item__title h1");
-    const blockColumns = document.querySelectorAll(".about__item");
-    const arrTexts = [];
-    const animationDone = [];
-
-    for (let i = 0; i < blockTitles.length; i++) {
-        var blockTitlesText = Number(blockTitles[i].id);
-        arrTexts.push(blockTitlesText);
-        animationDone.push(false);
-    }
-
-    var animateCounter = function (element, endValue) {
-        let startValue = 0;
-        let duration = 1500;
-        let startTime;
-
-        function step(timestamp) {
-            if (!startTime) startTime = timestamp;
-            const progress = (timestamp - startTime) / duration;
-
-            if (progress < 1) {
-                const value = Math.floor(startValue + (endValue - startValue) * progress);
-                element.textContent = value;
-                requestAnimationFrame(step);
-            } else {
-                element.textContent = endValue;
-            }
-        }
-
-        requestAnimationFrame(step);
-    };
-
-    var increment = function () {
-        for (let i = 0; i < blockColumns.length; i++) {
-            var blockColumnTop = blockColumns[i].getBoundingClientRect().top;
-            var koef = 2;
-
-            if (blockColumnTop < window.innerHeight - (blockColumns[i].clientHeight / koef) && blockColumnTop > 0 && !animationDone[i]) {
-                blockTitles[i].classList.add("active");
-                animateCounter(blockTitles[i], arrTexts[i]);
-                animationDone[i] = true;
-            }
-        }
-    }
-
-    window.addEventListener("load", increment);
-    window.addEventListener("scroll", increment);
-
     const linkServices = document.querySelector(".header__item #services");
     const linkGallery = document.querySelector(".header__item #gallery");
     const linkAbout = document.querySelector(".header__item #about");
@@ -224,9 +182,11 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener('scroll', function() {
         if ((window.scrollY) >= document.body.offsetHeight) {
             anchorUp.classList.add("show");
+            callbackButton.classList.add("show");
         }
         if (window.scrollY < document.body.offsetHeight) {
             anchorUp.classList.remove("show");
+            callbackButton.classList.remove("show");
         }
     });
 
